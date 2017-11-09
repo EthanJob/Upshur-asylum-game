@@ -1,3 +1,32 @@
 body {
-  /*background-color: blue;*/
+  background-color: black;
+  text-align: center;
+  font-family: Arial;
+  color: white;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+h1 {
+  font-family: fantasy;
+}
+
+h3 {
+  text-decoration: underline;
+}
+
+#container {
+  width: 60%;
+  margin: auto;
+}
+
+button {
+  height: 40px;
+  width: auto;
+  margin: 10px;
+  border: 1px solid red;
+  border-radius: 4px;
+  background-color: black;
+  color: red;
+  font-size: 15px;
 }
