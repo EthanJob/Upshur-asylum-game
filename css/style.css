@@ -24,9 +24,25 @@ button {
   height: 40px;
   width: auto;
   margin: 10px;
-  border: 1px solid red;
+  border: 2px solid red;
   border-radius: 4px;
   background-color: black;
   color: red;
   font-size: 15px;
+}
+
+#button1:hover {
+  transform: scale(1.4) rotate(-8deg);
+  transition-duration: 1s;
+}
+
+#button2:hover {
+  transform: scale(1.4) rotate(8deg);
+  transition-duration: 1s;
+}
+
+.health:hover {
+  color: red;
+  transform: scale(1.4);
+  transition-duration: 1s;
 }
