@@ -5,6 +5,12 @@
   font-size: 70px;
 }
 
+.startTitle:hover {
+  color: red;
+  transform: scale(1.3) rotate(4deg);
+  transition-duration: 8s;
+}
+
 .startInfo {
   font-size: 20px;
 }
@@ -23,7 +29,7 @@ h1 {
   font-family: fantasy;
 }
 
-h3 {
+.health {
   text-decoration: underline;
 }
 
