@@ -29,6 +29,11 @@ h1 {
   font-family: fantasy;
 }
 
+h1:hover {
+  color: red;
+  transition-duration: 5s;
+}
+
 .health {
   text-decoration: underline;
 }
