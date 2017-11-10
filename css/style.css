@@ -13,8 +13,13 @@
 
 .startInfo {
   font-size: 20px;
+  width: 60%;
+  margin: auto;
 }
 
+.creepy {
+  font-family: fantasy;
+}
 
 body {
   background-color: black;
@@ -34,7 +39,7 @@ h1:hover {
   transition-duration: 5s;
 }
 
-.health {
+.health100, .health75, .health50, .health25 {
   text-decoration: underline;
 }
 
@@ -77,8 +82,29 @@ button {
   transition-duration: 1s;
 }
 
-.health:hover {
+/***************
+*HEALTH HOVER
+****************/
+.health100:hover {
   color: limegreen;
+  transform: scale(1.4);
+  transition-duration: 1s;
+}
+
+.health75:hover {
+  color: yellow;
+  transform: scale(1.4);
+  transition-duration: 1s;
+}
+
+.health50:hover {
+  color: darkorange;
+  transform: scale(1.4);
+  transition-duration: 1s;
+}
+
+.health25:hover {
+  color: red;
   transform: scale(1.4);
   transition-duration: 1s;
 }
