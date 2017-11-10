@@ -42,7 +42,7 @@ button {
 }
 
 .health:hover {
-  color: red;
+  color: limegreen;
   transform: scale(1.4);
   transition-duration: 1s;
 }
