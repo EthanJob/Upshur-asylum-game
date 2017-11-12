@@ -78,12 +78,12 @@ button {
   transition-duration: 1s;
 }
 
-#button1:hover {
+.button1:hover {
   transform: scale(1.4) rotate(-8deg);
   transition-duration: 1s;
 }
 
-#button2:hover {
+.button2:hover {
   transform: scale(1.4) rotate(8deg);
   transition-duration: 1s;
 }
