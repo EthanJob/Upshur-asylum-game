@@ -25,7 +25,8 @@ $(() => {
   const $health25 = $('<h3>').text('Health: 25%').addClass('health25');
   // BUTTONS
   const $startBtn = $('#startButton');
-  const $cont1 = $('<button>').attr('id', 'startButton').text('Continue');
+  const $cont1 = $('<button>').attr('id', 'startButton').text('Next Room');
+  const $cont2 = $('<button>').attr('id', 'startButton').text('Next Room');
   // room 1
   const $button1a = $('<button>').addClass('button1').text('Path 1');
   const $button1b = $('<button>').addClass('button2').text('Path 2');
@@ -38,6 +39,9 @@ $(() => {
   // room 3
   const $button3a = $('<button>').addClass('button1').text('Path 1');
   const $button3b = $('<button>').addClass('button2').text('Path 2');
+  // office
+  const $officeBtn1 = $('<button>').addClass('button1').text('Search Desk');
+  const $officeBtn2 = $('<button>').addClass('button2').text('Next Room');
   // attack/run buttons
   const $attackBtn = $('<button>').addClass('button1').text('Attack');
   const $runBtn = $('<button>').addClass('button2').text('Run');
@@ -55,11 +59,11 @@ $(() => {
   // Story Paragraphs
   const $room1Text = $('<p>').html('The glass door just ahead of you is locked. <br><br>Path 1: There is a closed door to left. It looks like it may lead to a restroom. <br><br>Path 2: The door to the right is open and has light coming from inside. <br><br>Which path will you take?').addClass('roomText');
 
-  const $room2aText = $('<p>').html('entered restroom. *monster*').addClass('roomText');
+  const $room2aText = $('<p>').html('entered restroom. *monster* <br><br> *monster health*').addClass('roomText');
 
   const $room2bText = $('<p>').html("It looks like a kitchen with a stove-top and a fridge. There aren't any items on the tables and the room looks desolate. <br><br> Will you explore the fridge?<br><br> or <br><br> Will you continue to the next room?").addClass('roomText');
 
-  const $room3Text = $('<p>').html('this is the third story paragraph.').addClass('roomText');
+  const $room3Text = $('<p>').html('The hallway in front of you has an open door to the left and an open door to the right. The left door is silent but has a dim light coming from it. The door to the right has is well-lit and has a dripping sound coming from it. idk fix this part.<br><br> Path 1: Enter the room to the left. <br><br> or <br><br>Path 2: Enter the door to the right.').addClass('roomText');
 
 
   // FUNCTIONS
@@ -68,6 +72,16 @@ $(() => {
     $('.roomText').remove();
     $('.button1').remove();
     $('.button2').remove();
+  };
+  const $victoryKill = (event) => {
+    $room.append($room2aTitle);
+    $story.append( $('<p>').addClass('roomText').text('You defeated the monster!') );
+    $buttonArea.append($cont1);
+  };
+  const $victoryRun = (event) => {
+    $room.append($room2aTitle);
+    $story.append( $('<p>').addClass('roomText').text('You escaped the monster!') );
+    $buttonArea.append($cont1);
   };
   const $foundKnife = (event) => {
     $room.append( $('<h3>').addClass('roomTitle').text('Fridge') );
@@ -100,6 +114,7 @@ $(() => {
     $buttonArea.append($button3a, $button3b);
     $('body').attr('background', 'images/cage-hallway.jpg');
   };
+
   // START BUTTON
   $startBtn.on('click', (event) => {
     console.log('clicked start button');
@@ -129,13 +144,13 @@ $(() => {
     console.log("attack button clicked");
     $clear();
     // Attack sequence here with an if...else function
-    $chapter3();
+    $victoryKill();
   });
 
   $runBtn.on('click', (event) => {
     console.log("run button clicked");
     $clear();
-    $chapter3();
+    $victoryRun();
   });
 
   // ROOM 2B: PATH BUTTONS
@@ -153,6 +168,47 @@ $(() => {
   $button2bb.on('click', (event) => {
     $clear();
     $chapter3();
+  });
+
+  // ROOM 3: PATH BUTTONS
+  $button3a.on('click', (event) => {
+    $clear();
+    $room.append( $('<h3>').addClass('roomTitle').text('Office') );
+    $story.append( $('<p>').addClass('roomText').text('This room apears to  be an office with a desk and computer in the right corner. The computer is on but is not responsive.') );
+    $buttonArea.append($officeBtn1, $officeBtn2);
+    $('body').attr('background', 'images/office.jpg');
+  });
+  $button3b.on('click', (event) => {
+    $clear();
+    $('.chapterTitle').remove();
+    // CHAPTER 2
+    $chapter.append($chapter2Title);
+    $room.append($room1Title);
+    $('body').attr('background', 'images/elevator.jpg');
+  });
+  $officeBtn1.on('click', (event) => {
+    $('.roomText').remove();
+    $('.button1').remove();
+    $('.button2').remove();
+    $room.append( $('<p>').addClass('roomText').text('You found an elevator key!') );
+    $buttonArea.append($cont2);
+  });
+  $cont2.on('click', (event) => {
+    $clear();
+    $('.chapterTitle').remove();
+    $('#startButton').remove();
+    // CHAPTER 2
+    $chapter.append($chapter2Title);
+    $room.append($room1Title);
+    $('body').attr('background', 'images/elevator.jpg');
+  });
+  $officeBtn2.on('click', (event) => {
+    $clear();
+    $('.chapterTitle').remove();
+    // CHAPTER 2
+    $chapter.append($chapter2Title);
+    $room.append($room1Title);
+    $('body').attr('background', 'images/elevator.jpg');
   });
 
 
