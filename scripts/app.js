@@ -25,6 +25,7 @@ $(() => {
   const $health25 = $('<h3>').text('Health: 25%').addClass('health25');
   // BUTTONS
   const $startBtn = $('#startButton');
+  const $cont1 = $('<button>').attr('id', 'startButton').text('Continue');
   // room 1
   const $button1a = $('<button>').addClass('button1').text('Path 1');
   const $button1b = $('<button>').addClass('button2').text('Path 2');
@@ -67,6 +68,11 @@ $(() => {
     $('.roomText').remove();
     $('.button1').remove();
     $('.button2').remove();
+  };
+  const $foundKnife = (event) => {
+    $room.append( $('<h3>').addClass('roomTitle').text('Fridge') );
+    $story.append( $('<p>').addClass('roomText').text('You found a rusty kitchen knife!') );
+    $buttonArea.append($cont1);
   };
 
   // Chapters
@@ -133,6 +139,21 @@ $(() => {
   });
 
   // ROOM 2B: PATH BUTTONS
-  
+  $button2ba.on('click', (event) => {
+    console.log('explore button clicked');
+    $clear();
+    $foundKnife();
+  });
+
+  $cont1.on('click', (event) => {
+    $clear();
+    $('#startButton').remove();
+    $chapter3();
+  });
+  $button2bb.on('click', (event) => {
+    $clear();
+    $chapter3();
+  });
+
 
 }); // End
