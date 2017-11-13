@@ -42,7 +42,7 @@ h1 {
 
 h1:hover {
   color: red;
-  transition-duration: 5s;
+  transition-duration: 6s;
 }
 
 .health100, .health75, .health50, .health25 {
