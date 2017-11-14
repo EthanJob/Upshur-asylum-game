@@ -67,6 +67,7 @@ button {
   background-color: black;
   color: red;
   font-size: 15px;
+  cursor: pointer;
 }
 
 #startButton {

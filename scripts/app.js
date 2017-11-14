@@ -98,17 +98,18 @@ $(() => {
     $healthArea.append($health100);
     $('body').attr('background', 'images/2door-hallway.jpg');
   };
-  const $chapter2a = (event) => {
+  // Rooms
+  const $room2a = (event) => {
     $room.append($room2aTitle);
     $story.append($room2aText);
     $buttonArea.append($attackBtn, $runBtn);
   };
-  const $chapter2b = (event) => {
+  const $room2b = (event) => {
     $room.append($room2bTitle);
     $story.append($room2bText);
     $buttonArea.append($button2ba, $button2bb);
   };
-  const $chapter3 = (event) => {
+  const $room3 = (event) => {
     $room.append($room3Title);
     $story.append($room3Text);
     $buttonArea.append($button3a, $button3b);
@@ -130,13 +131,13 @@ $(() => {
   $button1a.on('click', (event) => {
     console.log('button 1 was clicked');
     $clear();
-    $chapter2a();
+    $room2a();
   });
 
   $button1b.on('click', (event) => {
     console.log('button 2 was clicked');
     $clear();
-    $chapter2b();
+    $room2b();
   });
 
   // ROOM 2A: PATH BUTTONS
@@ -163,11 +164,11 @@ $(() => {
   $cont1.on('click', (event) => {
     $clear();
     $('#startButton').remove();
-    $chapter3();
+    $room3();
   });
   $button2bb.on('click', (event) => {
     $clear();
-    $chapter3();
+    $room3();
   });
 
   // ROOM 3: PATH BUTTONS
