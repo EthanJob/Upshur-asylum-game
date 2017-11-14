@@ -55,6 +55,8 @@ $(() => {
   // Chapter 3 room 1
   const $chapter2Btn1 = $('<button>').addClass('button1').text('Unlock Elevator');
   const $chapter2Btn2 = $('<button>').addClass('button2').text('Take Stairs');
+  const $chapter2Btn1b = $('<button>').addClass('button1').text('Use Elevator');
+  const $backButton = $('<button>').text('Go back').attr('id', 'startButton');
   // attack/run buttons
   const $attackBtn = $('<button>').addClass('button1').text('Attack');
   const $runBtn = $('<button>').addClass('button2').text('Run');
@@ -78,7 +80,7 @@ $(() => {
 
   const $room3Text = $('<p>').html('The hallway in front of you has an open door to the left and an open door to the right. The left door is silent but has a dim light coming from it. The door to the right has is well-lit and has a dripping sound coming from it. idk fix this part.<br><br> Path 1: Enter the room to the left. <br><br> Or <br><br>Path 2: Enter the door to the right.').addClass('roomText');
 
-  const $chp2Txt = $('<p>').html("An old wheelchair lies on its back as blood covers the floor. There are two paths here: <br>A locked elevator to the left and a descending staircase to the right that may lead to a basement. <br><br> Will you unlock the elevator? <br><br> Or <br><br> Take the stairs to the basement?");
+  const $chp2Txt = $('<p>').html("An old wheelchair lies on its back as blood covers the floor. There are two paths here: <br>A locked elevator to the left and a descending staircase to the right that may lead to a basement. <br><br> Will you unlock the elevator? <br><br> Or <br><br> Take the stairs to the basement?").addClass('roomText');
 
   // FUNCTIONS
   const $clear = (event) => {
@@ -102,7 +104,7 @@ $(() => {
     $story.append( $('<p>').addClass('roomText').text('You found a rusty kitchen knife!') );
     $buttonArea.append($cont1);
     items.weapons = 'rusty knife';
-    $('#items').append( $('<h3>').addClass('items').text('Rusty Kitchen Knife') );
+    $('#items').append( $('<h3>').attr('id', 'knife').text('Rusty Kitchen Knife') );
   };
   const $foundKey = (event) => {
     $('.roomText').remove();
@@ -111,7 +113,7 @@ $(() => {
     $room.append( $('<p>').addClass('roomText').text('You found an elevator key!') );
     $buttonArea.append($cont2);
     items.keys = 'elevator key';
-    $('#items').append( $('<h3>').addClass('items').text('Elevator Key') );
+    $('#items').append( $('<h3>').attr('id', 'EKey').text('Elevator Key') );
   };
 
   // Chapters
@@ -232,6 +234,27 @@ $(() => {
     $clear();
     $('.chapterTitle').remove();
     // CHAPTER 2
+    $chapter2();
+  });
+  $chapter2Btn1.on('click', (event) => {
+    if (items.keys === 'elevator key') {
+      console.log('opened elevator');
+      $('#EKey').remove();
+      items.keys = null;
+      $chapter2Btn1.remove();
+      $chapter2Btn2.remove();
+      $buttonArea.append($chapter2Btn1b);
+      $buttonArea.append($chapter2Btn2);
+    } else {
+      console.log('elevator is locked');
+      $clear();
+      $story.append( $('<p>').html("You don't have an elevator key!").addClass('roomText') );
+      $buttonArea.append($backButton);
+    }
+  });
+  $backButton.on('click', (event) => {
+    $clear();
+    $backButton.remove();
     $chapter2();
   });
 
