@@ -69,6 +69,9 @@ $(() => {
   // room 2b
   const $attackBtn3 = $('<button>').addClass('button1').text('Attack');
   const $runBtn3 = $('<button>').addClass('button2').text('Run');
+  // room 3
+  const $chp2rm3Btn1 = $('<button>').addClass('button1').text('Left Door');
+  const $chp2rm3Btn2 = $('<button>').addClass('button2').text('Right Door');
   // TEXT VARIABLES
   // Chapters
   const $chapter1Title = $('<h2>').text('Chapter 1').addClass('chapterTitle');
@@ -81,6 +84,7 @@ $(() => {
   const $room3Title = $('<h3>').text('Room 3').addClass('roomTitle');
   const $enemyRoom = $('<h3>').text('Enemy').addClass('roomTitle');
   const $chp2rm2Title = $('<h3>').text('Room 2').addClass('roomTitle');
+  const $chp2rm3Title = $('<h3>').text('Room 2').addClass('roomTitle');
   // Story Paragraphs
   const $room1Text = $('<p>').html('The glass door just ahead of you is locked. <br><br>Path 1: There is a closed door to left. It looks like it may lead to a restroom. <br><br>Path 2: The door to the right is open and has light coming from inside. <br><br>Which path will you take?').addClass('roomText');
 
@@ -93,6 +97,8 @@ $(() => {
   const $chp2Txt = $('<p>').html("An old wheelchair lies on its back as blood covers the floor. There are two paths here: <br>A locked elevator to the left and a descending staircase to the right that may lead to the sewers. <br><br> Will you use the elevator? <br><br> Or <br><br> Will you take the stairs to the sewers?").addClass('roomText');
 
   const $chp2rm2Txt = $('<p>').html("monster will be here. *monster* <br><br> *monster health*").addClass('roomText');
+
+  const $chp2rm3Txt = $('<p>').html("There are two doors ahead. One to the left and one to the right. <br><br> A cool breeze and the faint sound of tree branches brushing against each other can be heard from the room to the left. <br><br> But <br><br> Heavy footsteps and whispers seem to be coming from the door to the right.").addClass('roomText');
 
   // FUNCTIONS
   const $clear = (event) => {
@@ -144,6 +150,16 @@ $(() => {
     $buttonArea.append($chapter2Btn1, $chapter2Btn2);
     $('body').attr('background', 'images/elevator.jpg');
   };
+  const $gameOver = (event) => {
+    $healthArea.remove();
+    $story.append( $('<p>').html("You were ambushed by a group of enemies.").addClass('roomText') );
+    $story.append( $('<h1>').html('GAME OVER').addClass('gameOver') );
+  };
+  const $gameOverFight = (event) => {
+    $healthArea.remove();
+    $story.append( $('<p>').html("You were killed by the monster.").addClass('roomText') );
+    $story.append( $('<h1>').html('GAME OVER').addClass('gameOver') );
+  };
   // Rooms
   const $room2a = (event) => {
     $room.append($room2aTitle);
@@ -171,6 +187,10 @@ $(() => {
     $room.append($chp2rm2Title);
     $story.append($chp2rm2Txt);
     $('body').attr('background', 'images/sewer.jpg');
+  };
+  const $chp2rm3 = (event) => {
+    $room.append($chp2rm3Title);
+    $story.append($chp2rm3Txt);
   };
 
   // START BUTTON
@@ -313,6 +333,19 @@ $(() => {
     $('.roomText').remove();
     $story.append( $('<p>').addClass('roomText').html("You escaped the monster!") );
     $buttonArea.append($cont3);
+  });
+  $cont3.on('click', (event) => {
+    console.log('continuing');
+    $clear();
+    $('#startButton').remove();
+    $chp2rm3();
+    $buttonArea.append($chp2rm3Btn1, $chp2rm3Btn2);
+  });
+  $chp2rm3Btn2.on('click', (event) => {
+    console.log('game over');
+    $clear();
+    $gameOver();
+    $('body').attr('background', 'images/falling.jpg');
   });
   // SEWERS
   $attackBtn3.on('click', (event) => {
