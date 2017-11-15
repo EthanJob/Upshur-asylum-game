@@ -5,6 +5,33 @@ $(() => {
     health: 100,
     attack: 7
   };
+  // HEALTH BARS
+  const $health100 = $('<h2>').text('Health: 100%').addClass('health100');
+  const $health75 = $('<h2>').text('Health: 75%').addClass('health75');
+  const $health50 = $('<h2>').text('Health: 50%').addClass('health50');
+  const $health25 = $('<h2>').text('Health: 25%').addClass('health25');
+
+  // HEALTH
+  const $healthPlace = () => {
+  if ($player.health === 100) {
+    $('.healthArea').append($health100);
+  } else if ($player.health === 75) {
+    $('.healthArea').append($health75);
+  } else if ($player.health === 50) {
+    $('.healthArea').append($health50);
+  } else if ($player.health === 25) {
+    $('.healthArea').append($health25);
+  } else {
+    console.log('no health');
+  }
+};
+
+  const $clearHealth = () => {
+    $('.health100').remove();
+    $('.health75').remove();
+    $('.health50').remove();
+    $('.health25').remove();
+  }
 
   // ITEMS
   const items = {
@@ -15,13 +42,13 @@ $(() => {
 
   // ENEMIES
   const $enemy1 = {
-    health: 10
+    health: 1
   };
   const $enemy2 = {
-    health: 10
+    health: 1
   };
   const $enemy3 = {
-    health: 10
+    health: 1
   };
   // VARIABLES
   const $container = $('#container');
@@ -30,11 +57,6 @@ $(() => {
   const $chapter = $('.chapter');
   const $room = $('.room');
   const $story = $('.story');
-  // HEALTH BARS
-  const $health100 = $('<h2>').text('Health: 100%').addClass('health100');
-  const $health75 = $('<h2>').text('Health: 75%').addClass('health75');
-  const $health50 = $('<h2>').text('Health: 50%').addClass('health50');
-  const $health25 = $('<h2>').text('Health: 25%').addClass('health25');
   // BUTTONS
   const $startBtn = $('#startButton');
   const $cont1 = $('<button>').attr('id', 'startButton').text('Next Room');
@@ -106,7 +128,7 @@ $(() => {
   // Story Paragraphs
   const $room1Text = $('<p>').html('The glass door just ahead of you is locked. <br><br>Path 1: There is a closed door to left. It looks like it may lead to a restroom. <br><br>Path 2: The door to the right is open and has light coming from inside. <br><br>Which path will you take?').addClass('roomText');
 
-  const $room2aText = $('<p>').html('entered restroom. *monster* <br><br> *monster health*').addClass('roomText');
+  const $room2aText = $('<p>').html('You entered the restroom but there is a monster here! <br><br>Attack or Run!').addClass('roomText');
 
   const $room2bText = $('<p>').html("This room appears to be a kitchen with a sink and a fridge. There aren't any items on the tables and the room looks desolate. <br><br> Will you explore the fridge?<br><br> or <br><br> Will you continue to the next room?").addClass('roomText');
 
@@ -149,6 +171,7 @@ $(() => {
     $buttonArea.append($cont1);
     items.weapons = 'rusty knife';
     $('#items').append( $('<h3>').attr('id', 'knife').text('Rusty Kitchen Knife') );
+    $player.attack = 9;
   };
   const $foundKey = (event) => {
     $('.roomText').remove();
@@ -178,7 +201,6 @@ $(() => {
     $room.append($room1Title);
     $story.append($room1Text);
     $buttonArea.append($button1a, $button1b);
-    $healthArea.append($health100);
     $('body').attr('background', 'images/2door-hallway.jpg');
   };
   const $chapter2 = (event) => {
@@ -197,6 +219,7 @@ $(() => {
     $healthArea.remove();
     $story.append( $('<p>').html("You were killed by the monster.").addClass('roomText') );
     $story.append( $('<h1>').html('GAME OVER').addClass('gameOver') );
+    $('body').attr('background', 'images/sewer-death.jpg');
   };
   const $winScene = (event) => {
     $story.append( $('<p>').html("You escaped the Upshur Asylum!").addClass('roomText') );
@@ -259,6 +282,7 @@ $(() => {
     // REMOVING START SCREEN
     $('.startTitle').removeClass();
     $('.startInfo').remove();
+    $healthPlace();
     $startBtn.remove();
     // ADDING CHAPTER 1
     $chapter1();
@@ -280,16 +304,34 @@ $(() => {
 
   // ROOM 2A: PATH BUTTONS
   $attackBtn.on('click', (event) => {
-    console.log("attack button clicked");
+    if (($player.health >= 50) && (Math.random() < .1) && ($enemy1.health = 1)) { // working here
+    $enemy1.health = 0;
     $clear();
-    // Attack sequence here with an if...else function
     $victoryKill();
+    console.log('hero hit');
+  } else if ($player.health === 25) {
+    $clear();
+    $gameOverFight();
+  } else {
+    $player.health -= 25;
+    console.log('enemy hit you');
+    // alert('enemy has hit you');
+    $('.roomText').remove();
+    $story.append( $('<p>').html("The monster dodged your attack and hit you!<br><br>Attack or Run!").addClass('roomText') );
+    $clearHealth();
+    $healthPlace();
+  }
   });
 
   $runBtn.on('click', (event) => {
+    if (($player.health >= 50) && (Math.random() < .5) && ($enemy1.health = 1)) {
     console.log("run button clicked");
     $clear();
     $victoryRun();
+  } else {
+    $clear();
+    $gameOverFight();
+  }
   });
 
   // ROOM 2B: PATH BUTTONS
@@ -490,6 +532,8 @@ $(() => {
     $('#masterKey').remove();
   });
 
-  console.log(items);
+  console.log($player);
+
+
 
 }); // End
