@@ -1,9 +1,10 @@
 
 $(() => {
 
-  // COMMENTS
-  // add player object with basic attack and attack with certain weapons
-  // COMMENTS
+  const $player = {
+    health: 100,
+    attack: 7
+  };
 
   // ITEMS
   const items = {
