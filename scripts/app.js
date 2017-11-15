@@ -304,7 +304,7 @@ $(() => {
 
   // ROOM 2A: PATH BUTTONS
   $attackBtn.on('click', (event) => {
-    if (($player.health >= 50) && (Math.random() < .1) && ($enemy1.health = 1)) { // working here
+    if (($player.health >= 50) && (Math.random() < .7) && ($enemy1.health = 1)) {
     $enemy1.health = 0;
     $clear();
     $victoryKill();
@@ -421,20 +421,43 @@ $(() => {
   });
   // ROOM 2
   $attackBtn2.on('click', (event) => {
-    console.log('attacking');
+    if (($player.health >= 50) && (Math.random() < .7) && ($enemy2.health = 1)) { // working here
+    $enemy2.health = 0;
+    $clear();
     $('.button1').remove();
     $('.button2').remove();
     $('.roomText').remove();
     $story.append( $('<p>').addClass('roomText').html("You killed the monster!") );
     $buttonArea.append($cont3);
+    console.log('hero hit attack 2');
+  } else if ($player.health === 25) {
+    $clear();
+    $gameOverFight();
+  } else {
+    $player.health -= 25;
+    console.log('enemy hit you');
+    // alert('enemy has hit you');
+    $('.roomText').remove();
+    $story.append( $('<p>').html("The monster dodged your attack and hit you!<br><br>Attack or Run!").addClass('roomText') );
+    $clearHealth();
+    $healthPlace();
+  }
+
   });
   $runBtn2.on('click', (event) => {
-    console.log('running');
+    if (($player.health >= 50) && (Math.random() < .5) && ($enemy2.health = 1)) {
+    console.log("run button clicked");
+    $clear();
     $('.button1').remove();
     $('.button2').remove();
     $('.roomText').remove();
     $story.append( $('<p>').addClass('roomText').html("You escaped the monster!") );
     $buttonArea.append($cont3);
+  } else {
+    $clear();
+    $gameOverFight();
+  }
+
   });
   $cont3.on('click', (event) => {
     console.log('continuing');
