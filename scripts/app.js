@@ -74,6 +74,9 @@ $(() => {
   const $chp2rm3Btn2 = $('<button>').addClass('button2').text('Right Door');
   // room 4
   const $climbButton = $('<button>').attr('id', 'window').text('Climb Out Window');
+  // sewer room
+  const $sewerButton1 = $('<button>').addClass('button1').text('Left Door');
+  const $sewerButton2 = $('<button>').addClass('button2').text('Right Door');
   // TEXT VARIABLES
   // Chapters
   const $chapter1Title = $('<h2>').text('Chapter 1').addClass('chapterTitle');
@@ -88,6 +91,7 @@ $(() => {
   const $chp2rm2Title = $('<h3>').text('Room 2').addClass('roomTitle');
   const $chp2rm3Title = $('<h3>').text('Room 2').addClass('roomTitle');
   const $chp2rm4Title = $('<h3>').text('Room 3').addClass('roomTitle');
+  const $sewerRm1Title = $('<h3>').text('Room 2').addClass('roomTitle');
   // Story Paragraphs
   const $room1Text = $('<p>').html('The glass door just ahead of you is locked. <br><br>Path 1: There is a closed door to left. It looks like it may lead to a restroom. <br><br>Path 2: The door to the right is open and has light coming from inside. <br><br>Which path will you take?').addClass('roomText');
 
@@ -104,6 +108,8 @@ $(() => {
   const $chp2rm3Txt = $('<p>').html("There are two doors ahead. One to the left and one to the right. <br><br> A cool breeze and the faint sound of tree branches brushing against each other can be heard from the room to the left. <br><br> But <br><br> Heavy footsteps and whispers seem to be coming from the door to the right.").addClass('roomText');
 
   const $chp3rm4Txt = $('<p>').html("This room is empty but has an open window with scaffolding just outside.<br><br>The front gate of the Upshur Asylum can be seen from here.").addClass('roomText');
+
+  const $sewerRm1Txt = $('<p>').html("There are two doors ahead. One to the left and one to the right. <br><br> The door to the right is unlocked and seems to lead to a locker room.<br><br> But <br><br> Heavy footsteps and whispers seem to be coming from the door to the right.").addClass('roomText');
 
   // FUNCTIONS
   const $clear = (event) => {
@@ -210,6 +216,11 @@ $(() => {
     $buttonArea.append($climbButton);
     $('body').attr('background', 'images/scaffolding.jpg');
   };
+  const $sewerRm1 = (event) => {
+    $room.append($sewerRm1Title);
+    $story.append($sewerRm1Txt);
+    $buttonArea.append($sewerButton1, $sewerButton2);
+  };                                  // working here
 
   // START BUTTON
   $startBtn.on('click', (event) => {
@@ -368,7 +379,7 @@ $(() => {
     $clear();
     $buttonArea.remove();
     $winScene();
-  }); 
+  });
   $chp2rm3Btn2.on('click', (event) => {
     console.log('game over');
     $clear();
@@ -391,6 +402,17 @@ $(() => {
     $('.roomText').remove();
     $story.append( $('<p>').addClass('roomText').html("You escaped the monster!") );
     $buttonArea.append($cont4);
+  });
+  $cont4.on('click', (event) => {
+    console.log('continue in sewer');
+    $clear();
+    $('#startButton').remove();
+    $sewerRm1();
+  });
+  $sewerButton2.on('click', (event) => {
+    $clear();
+    $gameOver();
+    $('body').attr('background', 'images/sewer-death.jpg');
   });
 
   console.log(items);
