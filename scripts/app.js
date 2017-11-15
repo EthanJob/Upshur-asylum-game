@@ -130,13 +130,15 @@ $(() => {
 
   const $room2aText = $('<p>').html('You entered the restroom but there is a monster here! <br><br>Attack or Run!').addClass('roomText');
 
-  const $room2bText = $('<p>').html("This room appears to be a kitchen with a sink and a fridge. There aren't any items on the tables and the room looks desolate. <br><br> Will you explore the fridge?<br><br> or <br><br> Will you continue to the next room?").addClass('roomText');
+  const $room2bText = $('<p>').html("This room appears to be a kitchen with a sink and a fridge. There aren't any items on the tables and the room looks desolate. <br><br> Will you explore the fridge?<br><br> Or <br><br> Will you continue to the next room?").addClass('roomText');
 
-  const $room3Text = $('<p>').html('The hallway in front of you has an open door to the left and an open door to the right. There is no sound coming from the door to the left but there is a dim light coming from inside. The door to the right is well-lit and has dripping sounds coming from it. <br><br> Path 1: Enter the room to the left. <br><br> Or <br><br>Path 2: Enter the door to the right.').addClass('roomText');
+  const $room3Text = $('<p>').html('The hallway in front of you has an open door to the left and an open door to the right. There is no sound coming from the door to the left but there is a dim light coming from inside. The door to the right is well-lit and has dripping sounds echoing from inside. <br><br> Path 1: Enter the room to the left. <br><br> Or <br><br>Path 2: Enter the door to the right.').addClass('roomText');
 
   const $chp2Txt = $('<p>').html("An old wheelchair lies on its back as blood covers the floor. There are two paths here: <br>A locked elevator to the left and a descending staircase to the right that may lead to the basement. <br><br> Will you use the elevator? <br><br> Or <br><br> Will you take the stairs to the basement?").addClass('roomText');
 
-  const $chp2rm2Txt = $('<p>').html("monster will be here. *monster* <br><br> *monster health*").addClass('roomText');
+  const $chp2rm2Txt = $('<p>').html("You ride the elevator up to the second floor. You pull the old elevator door back but as soon as you do this a monster appears from around the corner! <br><br>Attack or Run!").addClass('roomText');
+
+  const $sewerRoomFightTxt = $('<p>').html("You descend the old basement stairs but as soon as you reach the bottom a monster appears from around the corner!<br><br>Attack or Run!").addClass('roomText');
 
   const $chp2rm3Txt = $('<p>').html("There are two doors ahead. One to the left and one to the right. <br><br> A cool breeze and the faint sound of tree branches brushing against each other can be heard from the room to the left. <br><br> But <br><br> Heavy footsteps and whispers seem to be coming from the door to the right.").addClass('roomText');
 
@@ -253,6 +255,11 @@ $(() => {
   const $chp2rm2b = (event) => {
     $room.append($chp2rm2Title);
     $story.append($chp2rm2Txt);
+    $('body').attr('background', 'images/sewer.jpg');
+  };
+  const $sewerFight = (event) => {
+    $room.append($chp2rm2Title);
+    $story.append($sewerRoomFightTxt);
     $('body').attr('background', 'images/sewer.jpg');
   };
   const $chp2rm3 = (event) => {
@@ -394,13 +401,13 @@ $(() => {
     });
     $chapter2Btn2.on('click', (event) => {
       $clear();
-      $chp2rm2b();
+      $sewerFight();
       $buttonArea.append($attackBtn3, $runBtn3);
     });
   });
   $chapter2Btn2.on('click', (event) => {
     $clear();
-    $chp2rm2b();
+    $sewerFight();
     $buttonArea.append($attackBtn3, $runBtn3);
   });
   $chapter2Btn1b.on('click', (event) => {
@@ -557,7 +564,5 @@ $(() => {
   });
 
   console.log($player);
-
-
 
 }); // End
