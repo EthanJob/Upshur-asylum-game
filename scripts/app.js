@@ -3,7 +3,7 @@ $(() => {
 
   const $player = {
     health: 100,
-    attack: 7
+    attack: .7
   };
   // HEALTH BARS
   const $health100 = $('<h2>').text('Health: 100%').addClass('health100');
@@ -171,7 +171,7 @@ $(() => {
     $buttonArea.append($cont1);
     items.weapons = 'rusty knife';
     $('#items').append( $('<h3>').attr('id', 'knife').text('Rusty Kitchen Knife') );
-    $player.attack = 9;
+    $player.attack = .9;
   };
   const $foundKey = (event) => {
     $('.roomText').remove();
@@ -278,7 +278,6 @@ $(() => {
 
   // START BUTTON
   $startBtn.on('click', (event) => {
-    console.log('clicked start button');
     // REMOVING START SCREEN
     $('.startTitle').removeClass();
     $('.startInfo').remove();
@@ -291,52 +290,47 @@ $(() => {
 
   // ROOM 1: PATH BUTTONS
   $button1a.on('click', (event) => {
-    console.log('button 1 was clicked');
     $clear();
     $room2a();
   });
 
   $button1b.on('click', (event) => {
-    console.log('button 2 was clicked');
     $clear();
     $room2b();
   });
 
   // ROOM 2A: PATH BUTTONS
   $attackBtn.on('click', (event) => {
-    if (($player.health >= 50) && (Math.random() < .7) && ($enemy1.health = 1)) {
+    if (($player.health >= 50) && (Math.random() < $player.attack) && ($enemy1.health = 1)) {
     $enemy1.health = 0;
     $clear();
     $victoryKill();
-    console.log('hero hit');
   } else if ($player.health === 25) {
     $clear();
     $gameOverFight();
   } else {
     $player.health -= 25;
-    console.log('enemy hit you');
     // alert('enemy has hit you');
     $('.roomText').remove();
     $story.append( $('<p>').html("The monster dodged your attack and hit you!<br><br>Attack or Run!").addClass('roomText') );
     $clearHealth();
     $healthPlace();
-  }
+  };
   });
 
   $runBtn.on('click', (event) => {
     if (($player.health >= 50) && (Math.random() < .5) && ($enemy1.health = 1)) {
-    console.log("run button clicked");
     $clear();
     $victoryRun();
   } else {
     $clear();
     $gameOverFight();
-  }
+  };
+
   });
 
   // ROOM 2B: PATH BUTTONS
   $button2ba.on('click', (event) => {
-    console.log('explore button clicked');
     $clear();
     $foundKnife();
   });
@@ -383,14 +377,12 @@ $(() => {
   });
   $chapter2Btn1.on('click', (event) => {
     if (items.keys === 'elevator key') {
-      console.log('opened elevator');
       $('#EKey').remove();
       items.keys = null;
       $chapter2Btn1.remove();
       $chapter2Btn2.remove();
       $buttonArea.append($chapter2Btn1b, $chapter2Btn2);
     } else {
-      console.log('elevator is locked');
       $clear();
       $story.append( $('<p>').html("You don't have an elevator key!").addClass('roomText') );
       $buttonArea.append($backButton);
@@ -401,27 +393,24 @@ $(() => {
       $chapter2();
     });
     $chapter2Btn2.on('click', (event) => {
-      console.log('taking stairs');
       $clear();
       $chp2rm2b();
       $buttonArea.append($attackBtn3, $runBtn3);
     });
   });
   $chapter2Btn2.on('click', (event) => {
-    console.log('taking stairs');
     $clear();
     $chp2rm2b();
     $buttonArea.append($attackBtn3, $runBtn3);
   });
   $chapter2Btn1b.on('click', (event) => {
-    console.log('taking elevator');
     $clear();
     $chp2rm2a();
     $buttonArea.append($attackBtn2, $runBtn2);
   });
   // ROOM 2
   $attackBtn2.on('click', (event) => {
-    if (($player.health >= 50) && (Math.random() < .7) && ($enemy2.health = 1)) { // working here
+    if (($player.health >= 50) && (Math.random() < $player.attack) && ($enemy2.health = 1)) {
     $enemy2.health = 0;
     $clear();
     $('.button1').remove();
@@ -429,24 +418,21 @@ $(() => {
     $('.roomText').remove();
     $story.append( $('<p>').addClass('roomText').html("You killed the monster!") );
     $buttonArea.append($cont3);
-    console.log('hero hit attack 2');
   } else if ($player.health === 25) {
     $clear();
     $gameOverFight();
   } else {
     $player.health -= 25;
-    console.log('enemy hit you');
     // alert('enemy has hit you');
     $('.roomText').remove();
     $story.append( $('<p>').html("The monster dodged your attack and hit you!<br><br>Attack or Run!").addClass('roomText') );
     $clearHealth();
     $healthPlace();
-  }
+  };
 
   });
   $runBtn2.on('click', (event) => {
     if (($player.health >= 50) && (Math.random() < .5) && ($enemy2.health = 1)) {
-    console.log("run button clicked");
     $clear();
     $('.button1').remove();
     $('.button2').remove();
@@ -456,18 +442,16 @@ $(() => {
   } else {
     $clear();
     $gameOverFight();
-  }
+  };
 
   });
   $cont3.on('click', (event) => {
-    console.log('continuing');
     $clear();
     $('#startButton').remove();
     $chp2rm3();
     $buttonArea.append($chp2rm3Btn1, $chp2rm3Btn2);
   });
   $chp2rm3Btn1.on('click', (event) => {
-    console.log('left room');
     $clear();
     $chp2rm4();
   });
@@ -478,30 +462,48 @@ $(() => {
     $('body').attr('background', 'images/gate-exit.jpg');
   });
   $chp2rm3Btn2.on('click', (event) => {
-    console.log('game over');
     $clear();
     $gameOver();
     $('body').attr('background', 'images/falling.jpg');
   });
   // SEWERS
   $attackBtn3.on('click', (event) => {
-    console.log('attacking');
+    if (($player.health >= 50) && (Math.random() < $player.attack) && ($enemy3.health = 1)) {
+    $enemy3.health = 0;
+    $clear();
     $('.button1').remove();
     $('.button2').remove();
     $('.roomText').remove();
     $story.append( $('<p>').addClass('roomText').html("You killed the monster!") );
     $buttonArea.append($cont4);
+  } else if ($player.health === 25) {
+    $clear();
+    $gameOverFight();
+  } else {
+    $player.health -= 25;
+    // alert('enemy has hit you');
+    $('.roomText').remove();
+    $story.append( $('<p>').html("The monster dodged your attack and hit you!<br><br>Attack or Run!").addClass('roomText') );
+    $clearHealth();
+    $healthPlace();
+  };
+
   });
   $runBtn3.on('click', (event) => {
-    console.log('running');
+    if (($player.health >= 50) && (Math.random() < .5) && ($enemy1.health = 1)) {
+    $clear();
     $('.button1').remove();
     $('.button2').remove();
     $('.roomText').remove();
     $story.append( $('<p>').addClass('roomText').html("You escaped the monster!") );
     $buttonArea.append($cont4);
+  } else {
+    $clear();
+    $gameOverFight();
+  };
+
   });
   $cont4.on('click', (event) => {
-    console.log('continue in sewer');
     $clear();
     $('#startButton').remove();
     $sewerRm1();
@@ -512,7 +514,6 @@ $(() => {
     $('body').attr('background', 'images/sewer-death.jpg');
   });
   $sewerButton1.on('click', (event) => {
-    console.log('going to left room');
     $clear();
     $sewerRm2();
     $('body').attr('background', 'images/locker-room.png');
