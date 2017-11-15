@@ -8,8 +8,8 @@ $(() => {
   // ITEMS
   const items = {
     keys: null,
-    doorKeys: null,
-    weapons: null
+    weapons: null,
+    tools: null
   };
 
   // ENEMIES
@@ -77,6 +77,14 @@ $(() => {
   // sewer room
   const $sewerButton1 = $('<button>').addClass('button1').text('Left Door');
   const $sewerButton2 = $('<button>').addClass('button2').text('Right Door');
+  // locker room
+  const $largeLockers = $('<button>').addClass('button1').text('Large Lockers');
+  const $smallLockers = $('<button>').addClass('button2').text('Small Lockers');
+  // locker exit
+  const $lockerCont1 = $('<button>').attr('id', 'startButton').text('Next Room');
+  const $lockerCont2 = $('<button>').attr('id', 'startButton').text('Next Room');
+  const $useMasterKey = $('<button>').attr('id', 'window').text('Use Master Key');
+  const $useCrowbar = $('<button>').attr('id', 'window').text('Use Crowbar');
   // TEXT VARIABLES
   // Chapters
   const $chapter1Title = $('<h2>').text('Chapter 1').addClass('chapterTitle');
@@ -84,24 +92,26 @@ $(() => {
   const $chapter3Title = $('<h2>').text('Chapter 3').addClass('chapterTitle');
   // Rooms
   const $room1Title = $('<h3>').text('Room 1').addClass('roomTitle');
-  const $room2aTitle = $('<h3>').text('Room 2a').addClass('roomTitle');
-  const $room2bTitle = $('<h3>').text('Room 2b').addClass('roomTitle');
+  const $room2aTitle = $('<h3>').text('Room 2').addClass('roomTitle');
+  const $room2bTitle = $('<h3>').text('Room 2').addClass('roomTitle');
   const $room3Title = $('<h3>').text('Room 3').addClass('roomTitle');
   const $enemyRoom = $('<h3>').text('Enemy').addClass('roomTitle');
   const $chp2rm2Title = $('<h3>').text('Room 2').addClass('roomTitle');
   const $chp2rm3Title = $('<h3>').text('Room 2').addClass('roomTitle');
   const $chp2rm4Title = $('<h3>').text('Room 3').addClass('roomTitle');
-  const $sewerRm1Title = $('<h3>').text('Room 2').addClass('roomTitle');
+  const $sewerRm1Title = $('<h3>').text('Basement').addClass('roomTitle');
+  const $sewerRm2Title = $('<h3>').text('Locker Room').addClass('roomTitle');
+  const $basementExit = $('<h3>').text('Exit').addClass('roomTitle');
   // Story Paragraphs
   const $room1Text = $('<p>').html('The glass door just ahead of you is locked. <br><br>Path 1: There is a closed door to left. It looks like it may lead to a restroom. <br><br>Path 2: The door to the right is open and has light coming from inside. <br><br>Which path will you take?').addClass('roomText');
 
   const $room2aText = $('<p>').html('entered restroom. *monster* <br><br> *monster health*').addClass('roomText');
 
-  const $room2bText = $('<p>').html("It looks like a kitchen with a stove-top and a fridge. There aren't any items on the tables and the room looks desolate. <br><br> Will you explore the fridge?<br><br> or <br><br> Will you continue to the next room?").addClass('roomText');
+  const $room2bText = $('<p>').html("This room appears to be a kitchen with a sink and a fridge. There aren't any items on the tables and the room looks desolate. <br><br> Will you explore the fridge?<br><br> or <br><br> Will you continue to the next room?").addClass('roomText');
 
-  const $room3Text = $('<p>').html('The hallway in front of you has an open door to the left and an open door to the right. The left door is silent but has a dim light coming from it. The door to the right has is well-lit and has a dripping sound coming from it. idk fix this part.<br><br> Path 1: Enter the room to the left. <br><br> Or <br><br>Path 2: Enter the door to the right.').addClass('roomText');
+  const $room3Text = $('<p>').html('The hallway in front of you has an open door to the left and an open door to the right. There is no sound coming from the door to the left but there is a dim light coming from inside. The door to the right is well-lit and has dripping sounds coming from it. <br><br> Path 1: Enter the room to the left. <br><br> Or <br><br>Path 2: Enter the door to the right.').addClass('roomText');
 
-  const $chp2Txt = $('<p>').html("An old wheelchair lies on its back as blood covers the floor. There are two paths here: <br>A locked elevator to the left and a descending staircase to the right that may lead to the sewers. <br><br> Will you use the elevator? <br><br> Or <br><br> Will you take the stairs to the sewers?").addClass('roomText');
+  const $chp2Txt = $('<p>').html("An old wheelchair lies on its back as blood covers the floor. There are two paths here: <br>A locked elevator to the left and a descending staircase to the right that may lead to the basement. <br><br> Will you use the elevator? <br><br> Or <br><br> Will you take the stairs to the basement?").addClass('roomText');
 
   const $chp2rm2Txt = $('<p>').html("monster will be here. *monster* <br><br> *monster health*").addClass('roomText');
 
@@ -110,6 +120,10 @@ $(() => {
   const $chp3rm4Txt = $('<p>').html("This room is empty but has an open window with scaffolding just outside.<br><br>The front gate of the Upshur Asylum can be seen from here.").addClass('roomText');
 
   const $sewerRm1Txt = $('<p>').html("There are two doors ahead. One to the left and one to the right. <br><br> The door to the right is unlocked and seems to lead to a locker room.<br><br> But <br><br> Heavy footsteps and whispers seem to be coming from the door to the right.").addClass('roomText');
+
+  const $sewerRm2Txt = $('<p>').html("This room appears to be a locker room. There are large lockers lining the left wall and small lockers lining the right wall. <br><br> Will you search the large lockers? <br><br> Or <br><br> Will you search the small lockers?").addClass('roomText');
+
+  const $basementExitTxt = $('<p>').html("There is a locked steel door here. You may be able to pry it open with a tool or unlock it with a master key.").addClass('roomText');
 
   // FUNCTIONS
   const $clear = (event) => {
@@ -130,7 +144,7 @@ $(() => {
   };
   const $foundKnife = (event) => {
     $room.append( $('<h3>').addClass('roomTitle').text('Fridge') );
-    $story.append( $('<p>').addClass('roomText').text('You found a rusty kitchen knife!') );
+    $story.append( $('<p>').addClass('roomText').html("You found a rusty kitchen knife! <br><br> You now have a 90% chance to hit and kill enemies!") );
     $buttonArea.append($cont1);
     items.weapons = 'rusty knife';
     $('#items').append( $('<h3>').attr('id', 'knife').text('Rusty Kitchen Knife') );
@@ -143,6 +157,18 @@ $(() => {
     $buttonArea.append($cont2);
     items.keys = 'elevator key';
     $('#items').append( $('<h3>').attr('id', 'EKey').text('Elevator Key') );
+  };
+  const $foundCrowbar = (event) => {
+    $room.append( $('<h3>').addClass('roomTitle').text('Large Lockers') );
+    $story.append( $('<p>').html("You found a crowbar!").addClass('roomText') );
+    items.tools = 'crowbar';
+    $('#items').append( $('<h3>').attr('id', 'crowbar').text('Crowbar') );
+  };
+  const $foundMasterKey = (event) => {
+    $room.append( $('<h3>').addClass('roomTitle').text('Large Lockers') );
+    $story.append( $('<p>').html("You found a master key!").addClass('roomText') );
+    items.tools = 'master key';
+    $('#items').append( $('<h3>').attr('id', 'masterKey').text('Master Key') );
   };
 
   // Chapters
@@ -174,7 +200,6 @@ $(() => {
   const $winScene = (event) => {
     $story.append( $('<p>').html("You escaped the Upshur Asylum!").addClass('roomText') );
     $story.append( $('<h1>').html('YOU WIN!').addClass('win') );
-    $('body').attr('background', 'images/gate-exit.jpg');
   };
   // Rooms
   const $room2a = (event) => {
@@ -220,7 +245,12 @@ $(() => {
     $room.append($sewerRm1Title);
     $story.append($sewerRm1Txt);
     $buttonArea.append($sewerButton1, $sewerButton2);
-  };                                  // working here
+  };
+  const $sewerRm2 = (event) => {
+    $room.append($sewerRm2Title);
+    $story.append($sewerRm2Txt);
+    $buttonArea.append($largeLockers, $smallLockers);
+  };
 
   // START BUTTON
   $startBtn.on('click', (event) => {
@@ -379,6 +409,7 @@ $(() => {
     $clear();
     $buttonArea.remove();
     $winScene();
+    $('body').attr('background', 'images/gate-exit.jpg');
   });
   $chp2rm3Btn2.on('click', (event) => {
     console.log('game over');
@@ -413,6 +444,49 @@ $(() => {
     $clear();
     $gameOver();
     $('body').attr('background', 'images/sewer-death.jpg');
+  });
+  $sewerButton1.on('click', (event) => {
+    console.log('going to left room');
+    $clear();
+    $sewerRm2();
+    $('body').attr('background', 'images/locker-room.png');
+  });
+  $largeLockers.on('click', (event) => {
+    $clear();
+    $foundCrowbar();
+    $buttonArea.append($lockerCont1);
+  });
+  $smallLockers.on('click', (event) => {
+    $clear();
+    $foundMasterKey();
+    $buttonArea.append($lockerCont2);
+  });
+  $lockerCont1.on('click', (event) => { // crowbar
+    $clear();
+    $('#startButton').remove();
+    $room.append($basementExit);
+    $story.append($basementExitTxt);
+    $buttonArea.append($useCrowbar);
+  });
+  $lockerCont2.on('click', (event) => { // master key
+    $clear();
+    $('#startButton').remove();
+    $room.append($basementExit);
+    $story.append($basementExitTxt);
+    $buttonArea.append($useMasterKey);
+  });
+  $useCrowbar.on('click', (event) => {
+    $clear();
+    $buttonArea.remove();
+    $winScene();
+    $('body').attr('background', 'images/steel-door-exit.jpg');
+  });
+  $useMasterKey.on('click', (event) => {
+    $clear();
+    $buttonArea.remove();
+    $winScene();
+    $('body').attr('background', 'images/steel-door-exit.jpg');
+    $('#masterKey').remove();
   });
 
   console.log(items);
