@@ -75,6 +75,12 @@ h1:hover {
   font-size: 50px;
   color: red;
 }
+
+.win {
+  font-family: fantasy;
+  font-size: 50px;
+  color: limegreen;
+}
 /*****************
 * BUTTONS
 *****************/
@@ -96,6 +102,16 @@ button {
 }
 
 #startButton:hover {
+  transform: scale(1.3);
+  transition-duration: 1s;
+}
+
+#window {
+  width: 110px;
+  height: 50px;
+}
+
+#window:hover {
   transform: scale(1.3);
   transition-duration: 1s;
 }
