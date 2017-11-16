@@ -126,7 +126,7 @@ $(() => {
   const $sewerRm2Title = $('<h3>').text('Locker Room').addClass('roomTitle');
   const $basementExit = $('<h3>').text('Exit').addClass('roomTitle');
   // Story Paragraphs
-  const $room1Text = $('<p>').html('The glass door just ahead of you is locked. <br><br>Path 1: There is a closed door to left. It looks like it may lead to a restroom. <br><br>Path 2: The door to the right is open and has light coming from inside. <br><br>Which path will you take?').addClass('roomText');
+  const $room1Text = $('<p>').html('The glass door just ahead of you is locked. <br><br>Path 1: There is a closed door to the left. It looks like it may lead to a restroom. <br><br>Path 2: The door to the right is open and has light coming from inside. <br><br>Which path will you take?').addClass('roomText');
 
   const $room2aText = $('<p>').html('You entered the restroom but there is a monster here! <br><br>Attack or Run!').addClass('roomText');
 
@@ -136,7 +136,7 @@ $(() => {
 
   const $chp2Txt = $('<p>').html("An old wheelchair lies on its back as blood covers the floor. There are two paths here: <br>A locked elevator to the left and a descending staircase to the right that may lead to the basement. <br><br> Will you use the elevator? <br><br> Or <br><br> Will you take the stairs to the basement?").addClass('roomText');
 
-  const $chp2rm2Txt = $('<p>').html("You ride the elevator up to the second floor. You pull the old elevator door back but as soon as you do this a monster appears from around the corner! <br><br>Attack or Run!").addClass('roomText');
+  const $chp2rm2Txt = $('<p>').html("You ride the elevator up to the second floor. You pull the old elevator door back but as soon as you do this, a monster appears from around the corner! <br><br>Attack or Run!").addClass('roomText');
 
   const $sewerRoomFightTxt = $('<p>').html("You descend the old basement stairs but as soon as you reach the bottom a monster appears from around the corner!<br><br>Attack or Run!").addClass('roomText');
 
@@ -214,12 +214,12 @@ $(() => {
   };
   const $gameOver = (event) => {
     $healthArea.remove();
-    $story.append( $('<p>').html("You were ambushed by a group of enemies.").addClass('roomText') );
+    $story.append( $('<p>').html("You were ambushed by a group of monsters!").addClass('roomText') );
     $story.append( $('<h1>').html('GAME OVER').addClass('gameOver') );
   };
   const $gameOverFight = (event) => {
     $healthArea.remove();
-    $story.append( $('<p>').html("You were killed by the monster.").addClass('roomText') );
+    $story.append( $('<p>').html("You were killed by the monster!").addClass('roomText') );
     $story.append( $('<h1>').html('GAME OVER').addClass('gameOver') );
     $('body').attr('background', 'images/sewer-death.jpg');
   };
