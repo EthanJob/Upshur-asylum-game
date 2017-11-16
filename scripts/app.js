@@ -138,13 +138,13 @@ $(() => {
 
   const $chp2rm2Txt = $('<p>').html("You ride the elevator up to the second floor. You pull the old elevator door back but as soon as you do this, a monster appears from around the corner! <br><br>Attack or Run!").addClass('roomText');
 
-  const $sewerRoomFightTxt = $('<p>').html("You descend the old basement stairs but as soon as you reach the bottom a monster appears from around the corner!<br><br>Attack or Run!").addClass('roomText');
+  const $sewerRoomFightTxt = $('<p>').html("You descend the old basement stairs but as soon as you reach the bottom, a monster appears from around the corner!<br><br>Attack or Run!").addClass('roomText');
 
   const $chp2rm3Txt = $('<p>').html("There are two doors ahead. One to the left and one to the right. <br><br> A cool breeze and the faint sound of tree branches brushing against each other can be heard from the room to the left. <br><br> But <br><br> Heavy footsteps and whispers seem to be coming from the door to the right.").addClass('roomText');
 
   const $chp3rm4Txt = $('<p>').html("This room is empty but has an open window with scaffolding just outside.<br><br>The front gate of the Upshur Asylum can be seen from here.").addClass('roomText');
 
-  const $sewerRm1Txt = $('<p>').html("There are two doors ahead. One to the left and one to the right. <br><br> The door to the right is unlocked and seems to lead to a locker room.<br><br> But <br><br> Heavy footsteps and whispers seem to be coming from the door to the right.").addClass('roomText');
+  const $sewerRm1Txt = $('<p>').html("There are two doors ahead. One to the left and one to the right. <br><br> The door to the left is unlocked and seems to lead to a locker room.<br><br> But <br><br> Heavy footsteps and whispers seem to be coming from the door to the right.").addClass('roomText');
 
   const $sewerRm2Txt = $('<p>').html("This room appears to be a locker room. There are large lockers lining the left wall and small lockers lining the right wall. <br><br> Will you search the large lockers? <br><br> Or <br><br> Will you search the small lockers?").addClass('roomText');
 
