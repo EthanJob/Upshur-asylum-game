@@ -9,4 +9,4 @@ Tools and keys can be found throughout the existing levels. Each tool has a purp
 
 Play here: https://ethanjob.github.io/Upshur-asylum-game/
 
-![alt text](game-screenshot.png)
+[Imgur](https://i.imgur.com/oXj58gs.png)
