@@ -32,6 +32,19 @@ body {
   background-repeat: no-repeat;
 }
 
+footer {
+  background-color: black;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 30px;
+  width: 100%;
+  overflow:hidden;
+  padding-top: 10px;
+  font-size: 20px;
+  color: dimgrey;
+}
+
 p {
   background-color: rgba(0, 0, 0, .7);
   background: auto;
